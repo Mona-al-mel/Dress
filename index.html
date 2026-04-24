@@ -2,226 +2,233 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Dress & Impress | Mobile Elite</title>
-    <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:wght@400;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dress & Impress | Exclusive Couture</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:wght@400;700&family=Montserrat:wght@100;300;400&display=swap" rel="stylesheet">
     <style>
-        :root { --gold: #d4af37; --black: #0b0b0b; --white: #ffffff; --bg: #f9f9f9; }
-        
-        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-        body { font-family: 'Montserrat', sans-serif; background: var(--bg); color: var(--black); overflow-x: hidden; }
+        :root { --gold: #d4af37; --black: #0e0e0e; --white: #ffffff; --cream: #fdfcfb; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Montserrat', sans-serif; background: var(--cream); color: var(--black); overflow-x: hidden; }
 
-        /* Navbar - مصممة خصيصاً للموبايل */
+        /* Navigation */
         nav {
-            position: fixed; top: 0; width: 100%; height: 65px;
-            background: rgba(255, 255, 255, 0.98); backdrop-filter: blur(10px);
+            position: fixed; top: 0; width: 100%; padding: 20px 5%;
             display: flex; justify-content: space-between; align-items: center;
-            padding: 0 20px; z-index: 1000; border-bottom: 1px solid rgba(0,0,0,0.05);
+            z-index: 1000; background: rgba(253, 252, 251, 0.9); backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(0,0,0,0.05);
         }
-        .logo { font-family: 'Bodoni Moda'; font-size: 1.2rem; font-weight: bold; letter-spacing: 2px; }
-        .nav-links { display: flex; gap: 15px; }
-        .nav-links a { text-decoration: none; color: #888; font-size: 0.65rem; font-weight: 600; letter-spacing: 1px; }
-        .nav-links a.active { color: var(--black); border-bottom: 2px solid var(--gold); }
+        .logo { font-family: 'Bodoni Moda'; font-size: 1.2rem; font-weight: bold; letter-spacing: 2px; cursor: pointer; }
+        .nav-links a { text-decoration: none; color: #555; font-size: 0.7rem; margin-left: 15px; font-weight: 600; letter-spacing: 1px; }
+        .nav-links a.active { color: var(--gold); }
 
-        /* Hero - Full Mobile Screen */
-        .hero { 
-            height: 100vh; width: 100%; position: relative; 
-            display: flex; align-items: center; justify-content: center; text-align: center;
-            background: #000;
-        }
-        .hero video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.6; }
-        .hero-content { position: relative; z-index: 10; color: white; padding: 0 20px; }
-        .hero-content h1 { font-family: 'Bodoni Moda'; font-size: 3rem; line-height: 1; margin-bottom: 15px; }
-        .hero-content p { font-size: 0.7rem; letter-spacing: 4px; margin-bottom: 30px; text-transform: uppercase; }
+        /* Hero Section */
+        .hero { height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; position: relative; }
+        .hero-video-bg { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 1; }
+        .hero-video-bg video { width: 100%; height: 100%; object-fit: cover; opacity: 0.6; }
+        .hero-text { position: relative; z-index: 2; }
+        .hero-text h1 { font-family: 'Bodoni Moda'; font-size: 3rem; text-transform: uppercase; line-height: 1; }
+        .hero-text p { font-size: 0.7rem; letter-spacing: 5px; margin-top: 10px; }
 
         /* Sections */
-        section { padding: 85px 15px 30px; display: none; min-height: 100vh; }
-        section.active { display: block; animation: slideUp 0.4s ease-out; }
+        section { padding: 100px 20px; display: none; min-height: 100vh; }
+        section.active { display: block; }
 
-        /* Gallery Grid - 2 Columns on Mobile (نفس إنستغرام) */
-        .grid { 
-            display: grid; 
-            grid-template-columns: repeat(2, 1fr); 
-            gap: 12px; 
-        }
-        .card { background: white; border-radius: 12px; overflow: hidden; position: relative; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
-        .card img { width: 100%; aspect-ratio: 3/4; object-fit: cover; display: block; }
-        .card-name { padding: 10px; font-size: 0.7rem; font-weight: 600; text-align: center; text-transform: uppercase; }
+        /* Gallery */
+        .gallery-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 15px; }
+        .insta-post { position: relative; cursor: pointer; border-radius: 8px; overflow: hidden; background: #fff; }
+        .insta-post img { width: 100%; aspect-ratio: 4/5; object-fit: cover; display: block; }
 
-        /* FYD Reels - تجربة تيك توك حقيقية */
+        /* FYD - Reels System */
         .reels-container {
-            width: 100%; height: calc(100vh - 160px);
-            background: #000; border-radius: 20px; overflow-y: scroll;
-            scroll-snap-type: y mandatory;
+            width: 100%; max-width: 400px; margin: 0 auto; 
+            height: 75vh; overflow-y: scroll; scroll-snap-type: y mandatory;
+            background: #000; border-radius: 20px; border: 5px solid #111;
         }
         .reels-container::-webkit-scrollbar { display: none; }
-        .reel { height: 100%; width: 100%; scroll-snap-align: start; position: relative; }
-        .reel video { width: 100%; height: 100%; object-fit: cover; }
+        .reel-unit { height: 100%; width: 100%; scroll-snap-align: start; position: relative; }
+        .reel-unit video { width: 100%; height: 100%; object-fit: cover; }
 
-        /* Buttons & Admin */
-        .btn-main { 
-            padding: 16px 32px; background: var(--black); color: white; border: none; 
-            font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase; font-weight: 600;
-        }
+        /* Admin Controls */
         .admin-btn { 
-            position: fixed; bottom: 30px; right: 20px; z-index: 2000;
-            width: 55px; height: 55px; border-radius: 50%; background: var(--gold);
-            color: white; border: none; font-size: 24px; box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-            display: none; justify-content: center; align-items: center;
+            position: fixed; bottom: 30px; right: 20px; width: 55px; height: 55px; 
+            border-radius: 50%; background: var(--gold); color: white; border: none; 
+            font-size: 24px; z-index: 2000; display: none; box-shadow: 0 5px 15px rgba(0,0,0,0.2);
         }
 
-        /* Footer */
-        footer { background: #fff; padding: 50px 20px; text-align: center; border-top: 1px solid #eee; }
-        .socials { display: flex; justify-content: center; gap: 25px; margin-bottom: 20px; }
-        .socials a { color: var(--black); text-decoration: none; font-size: 0.7rem; font-weight: 600; letter-spacing: 1px; }
-        .brand-text { font-size: 0.6rem; opacity: 0.5; margin-top: 20px; }
-        .brand-text a { color: var(--gold); text-decoration: none; }
+        /* Loading Overlay */
+        #loader {
+            position: fixed; inset: 0; background: rgba(255,255,255,0.9);
+            display: none; flex-direction: column; justify-content: center; align-items: center; z-index: 5000;
+        }
+        .spinner { width: 40px; height: 40px; border: 4px solid #f3f3f3; border-top: 4px solid var(--gold); border-radius: 50%; animation: spin 1s linear infinite; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
 
         /* Modal */
-        .modal { position: fixed; inset: 0; background: white; z-index: 3000; display: none; padding: 40px 20px; }
-        .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; }
-        .close-btn { font-size: 30px; cursor: pointer; }
-        input, textarea { width: 100%; padding: 15px; margin-bottom: 15px; border: 1px solid #eee; border-radius: 8px; font-family: inherit; }
+        .modal { position: fixed; inset: 0; background: white; z-index: 3000; display: none; padding: 50px 20px; }
+        .close-modal { font-size: 40px; position: absolute; top: 10px; right: 20px; cursor: pointer; }
+        .cta-btn { width: 100%; padding: 15px; background: var(--black); color: white; border: none; letter-spacing: 2px; text-transform: uppercase; margin-top: 10px; cursor: pointer; }
 
-        @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        /* Footer */
+        footer { padding: 60px 20px; background: #000; color: white; text-align: center; }
+        .social-links a { color: white; text-decoration: none; margin: 0 15px; font-size: 0.7rem; letter-spacing: 2px; }
+        .brand-up { margin-top: 40px; font-size: 0.6rem; opacity: 0.4; }
+        .brand-up a { color: var(--gold); text-decoration: none; }
     </style>
 </head>
 <body>
 
+    <div id="loader">
+        <div class="spinner"></div>
+        <p style="margin-top: 15px; font-weight: bold; letter-spacing: 1px;">Loading Your Reel...</p>
+    </div>
+
     <nav>
         <div class="logo" id="adminLock">D&I</div>
         <div class="nav-links">
-            <a href="#" onclick="show('home')" id="l-home" class="active">HOME</a>
-            <a href="#" onclick="show('gallery')" id="l-gallery">COLLECTION</a>
-            <a href="#" onclick="show('fyd')" id="l-fyd">FYD</a>
+            <a href="#" onclick="showSection('home')" id="l-home" class="active">HOME</a>
+            <a href="#" onclick="showSection('gallery')" id="l-gallery">COLLECTION</a>
+            <a href="#" onclick="showSection('fyd')" id="l-fyd">FYD</a>
         </div>
     </nav>
 
-    <button id="addBtn" class="admin-btn" onclick="openM('addM')">+</button>
-    <button id="reelBtn" class="admin-btn" style="bottom:100px; background:#000;" onclick="openM('reelM')">🎥</button>
+    <div id="adminTools">
+        <button class="admin-btn" style="bottom: 100px;" onclick="openModal('addDressM')">+</button>
+        <button class="admin-btn" onclick="openModal('addReelM')">🎥</button>
+    </div>
 
     <section id="home" class="active" style="padding:0;">
         <div class="hero">
-            <video autoplay muted loop playsinline>
-                <source src="https://assets.mixkit.co/videos/preview/mixkit-fashion-model-walking-on-a-black-background-34448-large.mp4" type="video/mp4">
-            </video>
-            <div class="hero-content">
-                <p>Couture Boutique</p>
-                <h1>Dress &<br>Impress</h1>
-                <button class="btn-main" onclick="show('gallery')" style="margin-top:20px; background:var(--gold);">Discover</button>
+            <div class="hero-video-bg">
+                <video autoplay muted loop playsinline>
+                    <source src="https://assets.mixkit.co/videos/preview/mixkit-fashion-model-walking-on-a-black-background-34448-large.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div class="hero-text">
+                <p>EXCLUSIVE COUTURE</p>
+                <h1>DRESS &<br>IMPRESS</h1>
+                <button onclick="showSection('gallery')" style="margin-top:20px; background:none; border:1px solid black; padding:10px 20px; letter-spacing:2px; font-size:0.7rem; cursor:pointer;">EXPLORE</button>
             </div>
         </div>
     </section>
 
     <section id="gallery">
-        <h2 style="font-family: 'Bodoni Moda'; text-align: center; margin-bottom: 25px; font-size: 1.8rem;">The Collection</h2>
-        <div class="grid" id="dressGrid"></div>
+        <h2 style="text-align:center; margin-bottom:40px; font-family:'Bodoni Moda';">The Collection</h2>
+        <div class="gallery-grid" id="dressContainer"></div>
     </section>
 
     <section id="fyd">
-        <h2 style="font-family: 'Bodoni Moda'; text-align: center; margin-bottom: 20px; color: var(--gold);">For Your Dress</h2>
-        <div class="reels-container" id="reelFeed"></div>
+        <h2 style="text-align:center; margin-bottom:30px; font-family:'Bodoni Moda'; color:var(--gold);">For Your Dress</h2>
+        <div class="reels-container" id="videoFeed"></div>
     </section>
 
     <footer>
-        <h2 style="font-family: 'Bodoni Moda'; margin-bottom: 20px;">DRESS & IMPRESS</h2>
-        <div class="socials">
-            <a href="https://www.instagram.com/dress.impress.lb">INSTAGRAM</a>
-            <a href="https://www.tiktok.com/@dressimpress13">TIKTOK</a>
+        <h2 style="font-family: 'Bodoni Moda'; color: var(--gold); margin-bottom: 20px;">DRESS & IMPRESS</h2>
+        <div class="social-links">
+            <a href="https://www.instagram.com/dress.impress.lb" target="_blank">INSTAGRAM</a>
+            <a href="https://www.tiktok.com/@dressimpress13" target="_blank">TIKTOK</a>
         </div>
-        <a href="https://wa.me/96170196337" class="btn-main" style="display:inline-block; width:100%; margin-top:10px;">Book a Fitting</a>
-        <p class="brand-text">DESIGNED BY <a href="https://www.instagram.com/brand_up_lb">BRAND UP</a></p>
+        <div class="brand-up">DESIGNED BY <a href="https://www.instagram.com/brand_up_lb">BRAND UP</a></div>
     </footer>
 
-    <div id="addM" class="modal">
-        <div class="modal-header"><h3>New Dress</h3><span class="close-btn" onclick="closeM()">×</span></div>
-        <input type="text" id="dN" placeholder="Name">
-        <textarea id="dD" placeholder="Description" rows="4"></textarea>
-        <input type="file" id="dI" multiple accept="image/*">
-        <button class="btn-main" onclick="saveD()" style="width:100%">Save to Collection</button>
+    <div id="addDressM" class="modal">
+        <span class="close-modal" onclick="closeModals()">×</span>
+        <h3>Add Dress</h3><br>
+        <input type="text" id="dName" placeholder="Name" style="width:100%; padding:15px; margin-bottom:10px;">
+        <input type="file" id="dFiles" multiple accept="image/*"><br><br>
+        <button class="cta-btn" onclick="saveDress()">Save</button>
     </div>
 
-    <div id="reelM" class="modal">
-        <div class="modal-header"><h3>New Reel</h3><span class="close-btn" onclick="closeM()">×</span></div>
-        <input type="file" id="vI" accept="video/*">
-        <button class="btn-main" onclick="saveV()" style="width:100%">Upload Video</button>
+    <div id="addReelM" class="modal">
+        <span class="close-modal" onclick="closeModals()">×</span>
+        <h3>Upload Video Reel</h3><br>
+        <input type="file" id="vFile" accept="video/*"><br><br>
+        <button class="cta-btn" onclick="saveVideo()">Upload Reel</button>
     </div>
 
-    <div id="viewM" class="modal" style="overflow-y:auto;">
-        <span class="close-btn" onclick="closeM()" style="position:absolute; right:20px; top:15px;">×</span>
-        <div id="viewC" style="margin-top:30px;"></div>
+    <div id="viewerM" class="modal" style="overflow-y:auto;">
+        <span class="close-modal" onclick="closeModals()">×</span>
+        <div id="viewerContent"></div>
     </div>
 
     <script>
         let isAdmin = false; let clicks = 0;
-        document.getElementById('adminLock').onclick = () => { clicks++; if(clicks==6){ isAdmin=true; document.getElementById('addBtn').style.display='flex'; document.getElementById('reelBtn').style.display='flex'; alert('Admin Mode Active'); refresh(); }};
+        document.getElementById('adminLock').onclick = () => { clicks++; if(clicks==6){ isAdmin=true; document.querySelectorAll('.admin-btn').forEach(b=>b.style.display='flex'); alert('Admin Mode Active'); refresh(); }};
 
-        function show(id) {
-            document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
+        function showSection(id) {
+            document.querySelectorAll('section').forEach(s=>s.classList.remove('active'));
             document.getElementById(id).classList.add('active');
-            document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+            document.querySelectorAll('.nav-links a').forEach(a=>a.classList.remove('active'));
             document.getElementById('l-'+id).classList.add('active');
             window.scrollTo(0,0);
         }
 
-        function openM(id) { document.getElementById(id).style.display='block'; }
-        function closeM() { document.querySelectorAll('.modal').forEach(m => m.style.display='none'); }
+        function openModal(id) { document.getElementById(id).style.display='block'; }
+        function closeModals() { document.querySelectorAll('.modal').forEach(m=>m.style.display='none'); }
 
-        async function toB64(f) { return new Promise(r => { const rd = new FileReader(); rd.readAsDataURL(f); rd.onload = () => r(rd.result); }); }
-
-        async function saveD() {
-            const n=document.getElementById('dN').value, fs=document.getElementById('dI').files;
-            if(!n || fs.length==0) return;
-            const imgs = []; for(let f of fs) imgs.push(await toB64(f));
-            const data = JSON.parse(localStorage.getItem('m_di_d')||'[]');
-            data.push({id:Date.now(), n, imgs, d:document.getElementById('dD').value});
-            localStorage.setItem('m_di_d', JSON.stringify(data)); closeM(); refresh();
+        async function toB64(file) {
+            return new Promise(resolve => {
+                const reader = new FileReader();
+                reader.readAsDataURL(file);
+                reader.onload = () => resolve(reader.result);
+            });
         }
 
-        function renderD() {
-            const data = JSON.parse(localStorage.getItem('m_di_d')||'[]');
-            document.getElementById('dressGrid').innerHTML = data.map(i => `
-                <div class="card" onclick="openFull(${i.id})">
-                    <img src="${i.imgs[0]}">
-                    <div class="card-name">${i.n}</div>
-                    ${isAdmin ? `<button onclick="del(event,${i.id},'m_di_d')" style="position:absolute;top:5px;right:5px;background:red;color:white;border:none;padding:5px;font-size:10px;border-radius:50%;">X</button>`:''}
-                </div>
-            `).join('');
+        async function saveDress() {
+            const name = document.getElementById('dName').value;
+            const files = document.getElementById('dFiles').files;
+            if(!name || files.length === 0) return;
+            document.getElementById('loader').style.display='flex';
+            const imgs = []; for(let f of files) imgs.push(await toB64(f));
+            const data = JSON.parse(localStorage.getItem('di_d_v3') || '[]');
+            data.push({id: Date.now(), name, imgs});
+            localStorage.setItem('di_d_v3', JSON.stringify(data));
+            document.getElementById('loader').style.display='none';
+            closeModals(); refresh();
         }
 
-        function openFull(id) {
-            const i = JSON.parse(localStorage.getItem('m_di_d')||'[]').find(x=>x.id==id);
-            document.getElementById('viewC').innerHTML = `
-                <div style="display:flex; overflow-x:auto; gap:10px; scroll-snap-type: x mandatory;">
-                    ${i.imgs.map(img=>`<img src="${img}" style="width:90%; scroll-snap-align:center; border-radius:15px; flex-shrink:0;">`).join('')}
-                </div>
-                <h2 style="font-family:Bodoni Moda; margin-top:25px; font-size:2rem;">${i.n}</h2>
-                <p style="margin:15px 0; font-size:0.9rem; color:#555; line-height:1.6;">${i.d}</p>
-                <a href="https://wa.me/96170196337" class="btn-main" style="display:block; text-align:center; text-decoration:none;">Contact for Price</a>
-            `;
-            openM('viewM');
+        async function saveVideo() {
+            const file = document.getElementById('vFile').files[0];
+            if(!file) return;
+            document.getElementById('loader').style.display='flex';
+            const b64 = await toB64(file);
+            const vids = JSON.parse(localStorage.getItem('di_v_v3') || '[]');
+            vids.push({id: Date.now(), src: b64});
+            localStorage.setItem('di_v_v3', JSON.stringify(vids));
+            document.getElementById('loader').style.display='none';
+            closeModals(); refresh();
         }
 
-        async function saveV() {
-            const f=document.getElementById('vI').files[0]; if(!f) return;
-            const b64 = await toB64(f);
-            const data = JSON.parse(localStorage.getItem('m_di_v')||'[]');
-            data.push({id:Date.now(), s:b64});
-            localStorage.setItem('m_di_v', JSON.stringify(data)); closeM(); refresh();
+        function renderAll() {
+            const dresses = JSON.parse(localStorage.getItem('di_d_v3') || '[]');
+            document.getElementById('dressContainer').innerHTML = dresses.map(d => `
+                <div class="insta-post" onclick="viewDress(${d.id})">
+                    <img src="${d.imgs[0]}">
+                    ${isAdmin ? `<button onclick="del(event,${d.id},'di_d_v3')" style="position:absolute;top:5px;right:5px;background:red;color:white;border:none;padding:5px;">X</button>` : ''}
+                </div>`).join('');
+
+            const vids = JSON.parse(localStorage.getItem('di_v_v3') || '[]');
+            document.getElementById('videoFeed').innerHTML = vids.map(v => `
+                <div class="reel-unit">
+                    <video src="${v.src}" loop playsinline onclick="this.paused?this.play():this.pause()"></video>
+                    ${isAdmin ? `<button onclick="del(event,${v.id},'di_v_v3')" style="position:absolute;top:10px;right:10px;background:red;color:white;border:none;padding:10px;">DEL</button>` : ''}
+                </div>`).join('');
         }
 
-        function renderV() {
-            const data = JSON.parse(localStorage.getItem('m_di_v')||'[]');
-            document.getElementById('reelFeed').innerHTML = data.map(v => `
-                <div class="reel">
-                    <video src="${v.s}" loop playsinline onclick="this.paused?this.play():this.pause()"></video>
-                    ${isAdmin ? `<button onclick="del(event,${v.id},'m_di_v')" style="position:absolute;top:20px;right:20px;background:red;color:white;border:none;padding:10px;border-radius:10px;">DEL</button>`:''}
-                </div>
-            `).join('');
+        function viewDress(id) {
+            const d = JSON.parse(localStorage.getItem('di_d_v3') || '[]').find(x=>x.id==id);
+            document.getElementById('viewerContent').innerHTML = `
+                <div style="text-align:center;">
+                    <div style="display:flex; overflow-x:auto; gap:10px;">
+                        ${d.imgs.map(img => `<img src="${img}" style="width:80%; border-radius:10px; flex-shrink:0;">`).join('')}
+                    </div>
+                    <h2 style="margin-top:20px; font-family:Bodoni Moda;">${d.name}</h2>
+                    <a href="https://wa.me/96170196337" class="cta-btn" style="display:block; text-decoration:none;">Book via WhatsApp</a>
+                </div>`;
+            openModal('viewerM');
         }
 
-        function del(e, id, k) { e.stopPropagation(); if(confirm('Delete?')){ let d=JSON.parse(localStorage.getItem(k)); d=d.filter(x=>x.id!=id); localStorage.setItem(k,JSON.stringify(d)); refresh(); }}
-        function refresh() { renderD(); renderV(); }
+        function del(e, id, key) { e.stopPropagation(); if(confirm('Delete?')){ let d=JSON.parse(localStorage.getItem(key)); d=d.filter(x=>x.id!=id); localStorage.setItem(key,JSON.stringify(d)); refresh(); }}
+        function refresh() { renderAll(); }
         window.onload = refresh;
     </script>
 </body>
