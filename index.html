@@ -2,162 +2,159 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=1200"> 
-    <title>Dress & Impress | Exclusive</title>
-    <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:wght@400;700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Dress & Impress | Mobile Elite</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:wght@400;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
-        :root { --gold: #d4af37; --black: #0e0e0e; --white: #ffffff; --cream: #fdfcfb; }
+        :root { --gold: #d4af37; --black: #0b0b0b; --white: #ffffff; --bg: #f9f9f9; }
         
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { 
-            font-family: 'Montserrat', sans-serif; 
-            background: var(--cream); 
-            color: var(--black); 
-            min-width: 1200px; /* نثبت العرض ليمنع العناصر من النزول تحت بعضها */
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        body { font-family: 'Montserrat', sans-serif; background: var(--bg); color: var(--black); overflow-x: hidden; }
 
-        /* Navigation - سيبقى دائماً صف واحد */
+        /* Navbar - مصممة خصيصاً للموبايل */
         nav {
-            position: fixed; top: 0; width: 100%; height: 90px;
-            background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px);
+            position: fixed; top: 0; width: 100%; height: 65px;
+            background: rgba(255, 255, 255, 0.98); backdrop-filter: blur(10px);
             display: flex; justify-content: space-between; align-items: center;
-            padding: 0 50px; z-index: 1000; border-bottom: 1px solid #eee;
+            padding: 0 20px; z-index: 1000; border-bottom: 1px solid rgba(0,0,0,0.05);
         }
-        .logo { font-family: 'Bodoni Moda'; font-size: 2rem; font-weight: bold; cursor: pointer; letter-spacing: 3px; }
-        .nav-links { display: flex; align-items: center; }
-        .nav-links a { 
-            text-decoration: none; color: #666; font-size: 0.8rem; 
-            font-weight: 600; letter-spacing: 2px; margin-left: 40px;
-            transition: 0.3s;
-        }
+        .logo { font-family: 'Bodoni Moda'; font-size: 1.2rem; font-weight: bold; letter-spacing: 2px; }
+        .nav-links { display: flex; gap: 15px; }
+        .nav-links a { text-decoration: none; color: #888; font-size: 0.65rem; font-weight: 600; letter-spacing: 1px; }
         .nav-links a.active { color: var(--black); border-bottom: 2px solid var(--gold); }
 
-        /* Hero - ثابت المساحة */
+        /* Hero - Full Mobile Screen */
         .hero { 
-            position: relative; height: 100vh; width: 100%; 
-            display: flex; align-items: center; overflow: hidden; background: #fff;
+            height: 100vh; width: 100%; position: relative; 
+            display: flex; align-items: center; justify-content: center; text-align: center;
+            background: #000;
         }
-        .hero-video { position: absolute; right: 0; width: 60%; height: 100%; object-fit: cover; z-index: 1; }
-        .hero-content { position: relative; z-index: 2; padding-left: 100px; width: 45%; }
-        .hero-content h1 { font-family: 'Bodoni Moda'; font-size: 5rem; line-height: 0.9; margin-bottom: 20px; }
-        .hero-content p { font-size: 0.9rem; letter-spacing: 8px; margin-bottom: 40px; }
+        .hero video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.6; }
+        .hero-content { position: relative; z-index: 10; color: white; padding: 0 20px; }
+        .hero-content h1 { font-family: 'Bodoni Moda'; font-size: 3rem; line-height: 1; margin-bottom: 15px; }
+        .hero-content p { font-size: 0.7rem; letter-spacing: 4px; margin-bottom: 30px; text-transform: uppercase; }
 
         /* Sections */
-        section { padding: 140px 100px 60px; display: none; min-height: 100vh; }
-        section.active { display: block; }
+        section { padding: 85px 15px 30px; display: none; min-height: 100vh; }
+        section.active { display: block; animation: slideUp 0.4s ease-out; }
 
-        /* Collection Grid - دائماً 3 أو 4 أعمدة بجانب بعضها */
+        /* Gallery Grid - 2 Columns on Mobile (نفس إنستغرام) */
         .grid { 
             display: grid; 
-            grid-template-columns: repeat(4, 1fr); 
-            gap: 30px; width: 100%;
+            grid-template-columns: repeat(2, 1fr); 
+            gap: 12px; 
         }
+        .card { background: white; border-radius: 12px; overflow: hidden; position: relative; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+        .card img { width: 100%; aspect-ratio: 3/4; object-fit: cover; display: block; }
+        .card-name { padding: 10px; font-size: 0.7rem; font-weight: 600; text-align: center; text-transform: uppercase; }
 
-        .card { background: white; overflow: hidden; position: relative; transition: 0.5s; }
-        .card:hover { transform: translateY(-10px); }
-        .card img { width: 100%; aspect-ratio: 4/5; object-fit: cover; display: block; }
-        .card-info { padding: 20px; font-size: 1rem; font-weight: 600; text-align: center; border: 1px solid #eee; border-top: none; }
-
-        /* FYD Reels - شكل الكاروسيل الأفقي مثل لابتوب */
-        .reels-box {
-            width: 100%; max-width: 1000px; margin: 0 auto; 
-            height: 80vh; background: #000; border-radius: 10px;
-            overflow-y: scroll; scroll-snap-type: y mandatory;
+        /* FYD Reels - تجربة تيك توك حقيقية */
+        .reels-container {
+            width: 100%; height: calc(100vh - 160px);
+            background: #000; border-radius: 20px; overflow-y: scroll;
+            scroll-snap-type: y mandatory;
         }
-        .reels-box::-webkit-scrollbar { display: none; }
+        .reels-container::-webkit-scrollbar { display: none; }
         .reel { height: 100%; width: 100%; scroll-snap-align: start; position: relative; }
-        .reel video { width: 100%; height: 100%; object-fit: contain; }
+        .reel video { width: 100%; height: 100%; object-fit: cover; }
 
-        .btn { 
-            padding: 18px 40px; background: var(--black); color: white; border: none; 
-            text-transform: uppercase; font-size: 0.8rem; letter-spacing: 3px; cursor: pointer; text-decoration: none;
+        /* Buttons & Admin */
+        .btn-main { 
+            padding: 16px 32px; background: var(--black); color: white; border: none; 
+            font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase; font-weight: 600;
+        }
+        .admin-btn { 
+            position: fixed; bottom: 30px; right: 20px; z-index: 2000;
+            width: 55px; height: 55px; border-radius: 50%; background: var(--gold);
+            color: white; border: none; font-size: 24px; box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            display: none; justify-content: center; align-items: center;
         }
 
-        /* Footer - يبقى صف واحد */
-        footer { background: #000; color: white; padding: 80px 100px; text-align: center; }
-        .social { margin-bottom: 30px; }
-        .social a { color: white; text-decoration: none; margin: 0 25px; font-size: 0.9rem; letter-spacing: 2px; }
-        .brand { margin-top: 50px; font-size: 0.7rem; opacity: 0.5; }
-        .brand a { color: var(--gold); text-decoration: none; }
+        /* Footer */
+        footer { background: #fff; padding: 50px 20px; text-align: center; border-top: 1px solid #eee; }
+        .socials { display: flex; justify-content: center; gap: 25px; margin-bottom: 20px; }
+        .socials a { color: var(--black); text-decoration: none; font-size: 0.7rem; font-weight: 600; letter-spacing: 1px; }
+        .brand-text { font-size: 0.6rem; opacity: 0.5; margin-top: 20px; }
+        .brand-text a { color: var(--gold); text-decoration: none; }
 
-        /* Admin & Modals */
-        .admin-float { position: fixed; bottom: 40px; right: 40px; z-index: 2000; display: none; gap: 15px; }
-        .btn-round { width: 65px; height: 65px; border-radius: 50%; background: var(--gold); border: none; color: white; font-size: 24px; cursor: pointer; }
-        .modal { position: fixed; inset: 0; background: white; z-index: 3000; display: none; padding: 100px; overflow-y: auto; }
-        .close { font-size: 50px; position: absolute; top: 30px; right: 50px; cursor: pointer; }
-        input, textarea { width: 100%; padding: 20px; margin-bottom: 20px; border: 1px solid #ddd; font-size: 1rem; }
+        /* Modal */
+        .modal { position: fixed; inset: 0; background: white; z-index: 3000; display: none; padding: 40px 20px; }
+        .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; }
+        .close-btn { font-size: 30px; cursor: pointer; }
+        input, textarea { width: 100%; padding: 15px; margin-bottom: 15px; border: 1px solid #eee; border-radius: 8px; font-family: inherit; }
+
+        @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
 <body>
 
     <nav>
-        <div class="logo" id="unlock">D&I</div>
+        <div class="logo" id="adminLock">D&I</div>
         <div class="nav-links">
             <a href="#" onclick="show('home')" id="l-home" class="active">HOME</a>
             <a href="#" onclick="show('gallery')" id="l-gallery">COLLECTION</a>
-            <a href="#" onclick="show('fyd')" id="l-fyd">FOR YOUR DRESS</a>
-            <a href="https://wa.me/96170196337" style="color: var(--gold); border: 1px solid var(--gold); padding: 10px 20px; margin-left: 20px;">BOOK FITTING</a>
+            <a href="#" onclick="show('fyd')" id="l-fyd">FYD</a>
         </div>
     </nav>
 
-    <div class="admin-float" id="adminUI">
-        <button class="btn-round" onclick="openM('dressM')">+</button>
-        <button class="btn-round" style="background: #000" onclick="openM('reelM')">🎥</button>
-    </div>
+    <button id="addBtn" class="admin-btn" onclick="openM('addM')">+</button>
+    <button id="reelBtn" class="admin-btn" style="bottom:100px; background:#000;" onclick="openM('reelM')">🎥</button>
 
     <section id="home" class="active" style="padding:0;">
         <div class="hero">
-            <div class="hero-content">
-                <p>EXCLUSIVE COUTURE</p>
-                <h1>Dress &<br>Impress</h1>
-                <button class="btn" onclick="show('gallery')" style="margin-top: 30px;">View Collection</button>
-            </div>
-            <video class="hero-video" autoplay muted loop playsinline>
+            <video autoplay muted loop playsinline>
                 <source src="https://assets.mixkit.co/videos/preview/mixkit-fashion-model-walking-on-a-black-background-34448-large.mp4" type="video/mp4">
             </video>
+            <div class="hero-content">
+                <p>Couture Boutique</p>
+                <h1>Dress &<br>Impress</h1>
+                <button class="btn-main" onclick="show('gallery')" style="margin-top:20px; background:var(--gold);">Discover</button>
+            </div>
         </div>
     </section>
 
     <section id="gallery">
-        <h2 style="text-align: center; margin-bottom: 60px; font-family: 'Bodoni Moda'; font-size: 3rem;">The Collection</h2>
-        <div class="grid" id="dressG"></div>
+        <h2 style="font-family: 'Bodoni Moda'; text-align: center; margin-bottom: 25px; font-size: 1.8rem;">The Collection</h2>
+        <div class="grid" id="dressGrid"></div>
     </section>
 
     <section id="fyd">
-        <h2 style="text-align: center; margin-bottom: 50px; color: var(--gold); font-family: 'Bodoni Moda'; font-size: 3rem;">For Your Dress</h2>
-        <div class="reels-box" id="reelG"></div>
+        <h2 style="font-family: 'Bodoni Moda'; text-align: center; margin-bottom: 20px; color: var(--gold);">For Your Dress</h2>
+        <div class="reels-container" id="reelFeed"></div>
     </section>
 
     <footer>
-        <h3 style="font-family: 'Bodoni Moda'; color: var(--gold); font-size: 2rem; margin-bottom: 30px;">DRESS & IMPRESS</h3>
-        <div class="social">
-            <a href="https://www.instagram.com/dress.impress.lb" target="_blank">INSTAGRAM</a>
-            <a href="https://www.tiktok.com/@dressimpress13" target="_blank">TIKTOK</a>
+        <h2 style="font-family: 'Bodoni Moda'; margin-bottom: 20px;">DRESS & IMPRESS</h2>
+        <div class="socials">
+            <a href="https://www.instagram.com/dress.impress.lb">INSTAGRAM</a>
+            <a href="https://www.tiktok.com/@dressimpress13">TIKTOK</a>
         </div>
-        <div class="brand">
-            DESIGNED BY <a href="https://www.instagram.com/brand_up_lb" target="_blank">BRAND UP</a>
-        </div>
+        <a href="https://wa.me/96170196337" class="btn-main" style="display:inline-block; width:100%; margin-top:10px;">Book a Fitting</a>
+        <p class="brand-text">DESIGNED BY <a href="https://www.instagram.com/brand_up_lb">BRAND UP</a></p>
     </footer>
 
-    <div id="dressM" class="modal"><span class="close" onclick="closeM()">×</span>
-        <h2>Add New Dress</h2><br>
-        <input type="text" id="dN" placeholder="Dress Name">
-        <textarea id="dD" placeholder="Description"></textarea>
+    <div id="addM" class="modal">
+        <div class="modal-header"><h3>New Dress</h3><span class="close-btn" onclick="closeM()">×</span></div>
+        <input type="text" id="dN" placeholder="Name">
+        <textarea id="dD" placeholder="Description" rows="4"></textarea>
         <input type="file" id="dI" multiple accept="image/*">
-        <button class="btn" onclick="saveD()">Upload to Collection</button>
+        <button class="btn-main" onclick="saveD()" style="width:100%">Save to Collection</button>
     </div>
 
-    <div id="reelM" class="modal"><span class="close" onclick="closeM()">×</span>
-        <h2>Add Video Reel</h2><br>
+    <div id="reelM" class="modal">
+        <div class="modal-header"><h3>New Reel</h3><span class="close-btn" onclick="closeM()">×</span></div>
         <input type="file" id="vI" accept="video/*">
-        <button class="btn" onclick="saveV()">Publish Reel</button>
+        <button class="btn-main" onclick="saveV()" style="width:100%">Upload Video</button>
     </div>
 
-    <div id="viewM" class="modal"><span class="close" onclick="closeM()">×</span><div id="viewC"></div></div>
+    <div id="viewM" class="modal" style="overflow-y:auto;">
+        <span class="close-btn" onclick="closeM()" style="position:absolute; right:20px; top:15px;">×</span>
+        <div id="viewC" style="margin-top:30px;"></div>
+    </div>
 
     <script>
-        let admin = false; let clicks = 0;
-        document.getElementById('unlock').onclick = () => { clicks++; if(clicks==6){ admin=true; document.getElementById('adminUI').style.display='flex'; alert('Admin Mode ON'); refresh(); }};
+        let isAdmin = false; let clicks = 0;
+        document.getElementById('adminLock').onclick = () => { clicks++; if(clicks==6){ isAdmin=true; document.getElementById('addBtn').style.display='flex'; document.getElementById('reelBtn').style.display='flex'; alert('Admin Mode Active'); refresh(); }};
 
         function show(id) {
             document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
@@ -176,57 +173,54 @@
             const n=document.getElementById('dN').value, fs=document.getElementById('dI').files;
             if(!n || fs.length==0) return;
             const imgs = []; for(let f of fs) imgs.push(await toB64(f));
-            const data = JSON.parse(localStorage.getItem('di_final_d')||'[]');
+            const data = JSON.parse(localStorage.getItem('m_di_d')||'[]');
             data.push({id:Date.now(), n, imgs, d:document.getElementById('dD').value});
-            localStorage.setItem('di_final_d', JSON.stringify(data)); closeM(); refresh();
+            localStorage.setItem('m_di_d', JSON.stringify(data)); closeM(); refresh();
         }
 
         function renderD() {
-            const data = JSON.parse(localStorage.getItem('di_final_d')||'[]');
-            document.getElementById('dressG').innerHTML = data.map(i => `
-                <div class="card" onclick="openV(${i.id})">
+            const data = JSON.parse(localStorage.getItem('m_di_d')||'[]');
+            document.getElementById('dressGrid').innerHTML = data.map(i => `
+                <div class="card" onclick="openFull(${i.id})">
                     <img src="${i.imgs[0]}">
-                    <div class="card-info">${i.n}</div>
-                    ${admin ? `<button onclick="del(event,${i.id},'di_final_d')" style="position:absolute;top:10px;right:10px;background:red;color:white;border:none;padding:8px;cursor:pointer;">DELETE</button>`:''}
+                    <div class="card-name">${i.n}</div>
+                    ${isAdmin ? `<button onclick="del(event,${i.id},'m_di_d')" style="position:absolute;top:5px;right:5px;background:red;color:white;border:none;padding:5px;font-size:10px;border-radius:50%;">X</button>`:''}
                 </div>
             `).join('');
         }
 
-        function openV(id) {
-            const i = JSON.parse(localStorage.getItem('di_final_d')||'[]').find(x=>x.id==id);
+        function openFull(id) {
+            const i = JSON.parse(localStorage.getItem('m_di_d')||'[]').find(x=>x.id==id);
             document.getElementById('viewC').innerHTML = `
-                <div style="display:flex; gap:50px; align-items:start;">
-                    <div style="flex:1; display:flex; overflow-x:auto; gap:20px;">
-                        ${i.imgs.map(img=>`<img src="${img}" style="height:70vh; border-radius:5px;">`).join('')}
-                    </div>
-                    <div style="width:400px; padding-top:50px;">
-                        <h2 style="font-family:Bodoni Moda; font-size:3rem; margin-bottom:20px;">${i.n}</h2>
-                        <p style="margin-bottom:40px; line-height:1.8; color:#444;">${i.d}</p>
-                        <a href="https://wa.me/96170196337" class="btn">Inquire Now</a>
-                    </div>
-                </div>`;
+                <div style="display:flex; overflow-x:auto; gap:10px; scroll-snap-type: x mandatory;">
+                    ${i.imgs.map(img=>`<img src="${img}" style="width:90%; scroll-snap-align:center; border-radius:15px; flex-shrink:0;">`).join('')}
+                </div>
+                <h2 style="font-family:Bodoni Moda; margin-top:25px; font-size:2rem;">${i.n}</h2>
+                <p style="margin:15px 0; font-size:0.9rem; color:#555; line-height:1.6;">${i.d}</p>
+                <a href="https://wa.me/96170196337" class="btn-main" style="display:block; text-align:center; text-decoration:none;">Contact for Price</a>
+            `;
             openM('viewM');
         }
 
         async function saveV() {
             const f=document.getElementById('vI').files[0]; if(!f) return;
             const b64 = await toB64(f);
-            const data = JSON.parse(localStorage.getItem('di_final_v')||'[]');
+            const data = JSON.parse(localStorage.getItem('m_di_v')||'[]');
             data.push({id:Date.now(), s:b64});
-            localStorage.setItem('di_final_v', JSON.stringify(data)); closeM(); refresh();
+            localStorage.setItem('m_di_v', JSON.stringify(data)); closeM(); refresh();
         }
 
         function renderV() {
-            const data = JSON.parse(localStorage.getItem('di_final_v')||'[]');
-            document.getElementById('reelG').innerHTML = data.map(v => `
+            const data = JSON.parse(localStorage.getItem('m_di_v')||'[]');
+            document.getElementById('reelFeed').innerHTML = data.map(v => `
                 <div class="reel">
                     <video src="${v.s}" loop playsinline onclick="this.paused?this.play():this.pause()"></video>
-                    ${admin ? `<button onclick="del(event,${v.id},'di_final_v')" style="position:absolute;top:30px;right:30px;background:red;color:white;border:none;padding:15px;cursor:pointer;">DELETE VIDEO</button>`:''}
+                    ${isAdmin ? `<button onclick="del(event,${v.id},'m_di_v')" style="position:absolute;top:20px;right:20px;background:red;color:white;border:none;padding:10px;border-radius:10px;">DEL</button>`:''}
                 </div>
             `).join('');
         }
 
-        function del(e, id, k) { e.stopPropagation(); if(confirm('Delete permanently?')){ let d=JSON.parse(localStorage.getItem(k)); d=d.filter(x=>x.id!=id); localStorage.setItem(k,JSON.stringify(d)); refresh(); }}
+        function del(e, id, k) { e.stopPropagation(); if(confirm('Delete?')){ let d=JSON.parse(localStorage.getItem(k)); d=d.filter(x=>x.id!=id); localStorage.setItem(k,JSON.stringify(d)); refresh(); }}
         function refresh() { renderD(); renderV(); }
         window.onload = refresh;
     </script>
